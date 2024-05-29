@@ -13,9 +13,12 @@ import random
 import duckdb
 import os
 
-
-# Definir a localidade para o Brasil
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+# Tentar definir a localidade para o Brasil
+try:
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+except locale.Error:
+    st.warning("Localidade 'pt_BR.UTF-8' não está disponível. Usando localidade padrão.")
+    
 # Função para formatar como moeda do Brasil
 def formatar_moeda(valor):
     return locale.currency(valor, grouping=True)
@@ -25,8 +28,7 @@ from sqlalchemy import create_engine
 engine = create_engine('oracle+oracledb://', creator=lambda: connection)
 
 # Defina a variável de ambiente ORACLE_HOME
-oracledb.init_oracle_client(lib_dir=r"C:\\Oracle\\instantclient_21_13")
-#oracledb.init_oracle_client(lib_dir=r"/Applications/oracle/client/instantclient_19-3")
+oracledb.init_oracle_client(lib_dir=r"/home/vscode/oracle_client/instantclient_23_4")
 
 st.set_page_config(
     page_title="Dashboard Diretoria",
@@ -36,19 +38,12 @@ st.set_page_config(
     )
 alt.themes.enable("dark")
 
-User = os.getenv('USER')
-Password = os.getenv('PASSWORD')
-DNS = os.getenv('DNS')
-
-st.title(User)
-st.title(Password)
-st.title(DNS)
 # connect to oracle database
 connection=oracledb.connect(
     user="EDIUSER",
     password="EDIUSER",
-    dsn="10.180.200.2:1521/PROTON"#,
-    #dsn="187.109.221.38:1521/PROTON"#,
+    #dsn="10.180.200.2:1521/PROTON"#,
+    dsn="187.109.221.38:1521/PROTON"#,
     #config_dir=wallet_location,
     #wallet_location=wallet_location,
     #wallet_password=wallet_pw
@@ -434,6 +429,7 @@ if authenticate_user():
         st.plotly_chart(fig, use_container_width=True)
 
     ##############################################################################################
+
 
 
     #######################
