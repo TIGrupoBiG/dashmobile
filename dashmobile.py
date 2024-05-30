@@ -21,7 +21,11 @@ except locale.Error:
     
 # Função para formatar como moeda do Brasil
 def formatar_moeda(valor):
-    return locale.currency(valor, grouping=True)
+    try:
+        return locale.currency(valor, grouping=True)
+    except Exception:
+        # Formatação manual caso a localidade não esteja disponível
+        return f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
 # create engine
 from sqlalchemy import create_engine
@@ -39,15 +43,15 @@ st.set_page_config(
 alt.themes.enable("dark")
 
 # connect to oracle database
-connection=oracledb.connect(
-    user="EDIUSER",
-    password="EDIUSER",
-    #dsn="10.180.200.2:1521/PROTON"#,
-    dsn="187.109.221.38:1521/PROTON"#,
-    #config_dir=wallet_location,
-    #wallet_location=wallet_location,
-    #wallet_password=wallet_pw
-    )
+user = os.getenv('DB_USER')
+password = os.getenv('DB_PASSWORD')
+dsn = "187.109.221.38:1521/PROTON"
+
+connection = oracledb.connect(
+    user=user,
+    password=password,
+    dsn=dsn
+)
 
     
 def creds_entered(login, senha):
