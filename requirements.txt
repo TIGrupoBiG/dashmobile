@@ -1,0 +1,7 @@
+streamlit
+pandas
+plotly
+altair
+sqlalchemy
+duckdb
+oracledb
