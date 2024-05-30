@@ -47,12 +47,15 @@ user = os.getenv('EDIUSER')
 password = os.getenv('EDIUSER')
 dsn = "187.109.221.38:1521/PROTON"
 
-connection = oracledb.connect(
-    user=user,
-    password=password,
-    dsn=dsn
-)
-
+connection=oracledb.connect(
+    user="EDIUSER",
+    password="EDIUSER",
+    #dsn="10.180.200.2:1521/PROTON"#,
+    dsn="187.109.221.38:1521/PROTON"#,
+    #config_dir=wallet_location,
+    #wallet_location=wallet_location,
+    #wallet_password=wallet_pw
+    )
     
 def creds_entered(login, senha):
     # Verifica se o login e a senha foram fornecidos
