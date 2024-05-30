@@ -43,8 +43,8 @@ st.set_page_config(
 alt.themes.enable("dark")
 
 # connect to oracle database
-user = os.getenv('DB_USER')
-password = os.getenv('DB_PASSWORD')
+user = os.getenv('EDIUSER')
+password = os.getenv('EDIUSER')
 dsn = "187.109.221.38:1521/PROTON"
 
 connection = oracledb.connect(
