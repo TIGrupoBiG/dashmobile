@@ -14,10 +14,10 @@ import duckdb
 import os
 
 # Tentar definir a localidade para o Brasil
-try:
-    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-except locale.Error:
-    st.warning("Localidade 'pt_BR.UTF-8' não está disponível. Usando localidade padrão.")
+#try:
+#    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+#except locale.Error:
+#    st.warning("Localidade 'pt_BR.UTF-8' não está disponível. Usando localidade padrão.")
     
 # Função para formatar como moeda do Brasil
 def formatar_moeda(valor):
